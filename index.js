@@ -1,4 +1,4 @@
-const ws = require("ws");
+const WebSocket = require("ws");
 const dotenv = require("dotenv");
 const { config } = require("./config");
 const { 
@@ -18,7 +18,7 @@ function sendRequest(ws) {
         method: "logsSubscribe",
         params: [
             {
-                mentions: [config.liquidity_pool.radiyum_program_id],
+                mentions: [config.liquidityPool.radiyum_program_id],
             },
             {
                 commitment: "processed",
@@ -30,7 +30,7 @@ function sendRequest(ws) {
 
 let init = false;
 async function websocketHandler() {
-    let ws = new ws(process.env.HELIUS_WSS_URI || "");
+    let ws = new WebSocket(process.env.HELIUS_WEBSOCKET_URI || "");
     let transactionOngoing = false;
     if (!init) console.clear();
 
